@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Bash script to listen on port 98 on localhost.
+cleanup() {
+    echo "Script terminated. Cleaning up..."
+    rm -f /tmp/port_listener
+    exit
+}
+trap cleanup EXIT INT TERM
+mkfifo /tmp/port_listener
+echo "Listening on port 98. Connect using 'telnet localhost 98'"
+cat /tmp/port_listener | nc -l -p 98

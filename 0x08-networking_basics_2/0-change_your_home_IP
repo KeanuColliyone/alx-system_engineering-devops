@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Bash script to configure hosts file on an Ubuntu server.
+if [ -f /.dockerenv ]; then
+    echo "Running on Docker"
+else
+    echo "Not running on Docker. Exiting..."
+    exit 1
+fi
+echo "Original /etc/hosts file:"
+cat /etc/hosts
+sudo sed -i 's/127.0.0.1 localhost/127.0.0.2 localhost/' /etc/hosts
+sudo sed -i 's/\(.*\)facebook.com/\1 8.8.8.8 facebook.com/' /etc/hosts
+echo -e "\nUpdated /etc/hosts file:"
+cat /etc/hosts
