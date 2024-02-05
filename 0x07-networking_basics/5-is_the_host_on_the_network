@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-# Bash script to ping an IP address and display the results.
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 {IP_ADDRESS}"
-    exit 1
-fi
-ip_address=$1
-ping -c 5 $ip_address
