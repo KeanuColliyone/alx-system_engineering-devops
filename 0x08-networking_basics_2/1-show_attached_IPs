@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-# Bash script to display all active IPv4 IPs on the machine.
-primary_ip=$(hostname -I | cut -d' ' -f1)
-ipv4_addresses=$(ifconfig | grep -oP 'inet\s+\K[0-9.]+')
-echo "$primary_ip"
-echo "$ipv4_addresses"
