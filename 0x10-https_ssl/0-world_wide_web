@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# This script fetches and displays DNS information for specific subdomains.
+
+get_dns_record() {
+  local subdomain=$1
+  local domain=$2
+  dig "$subdomain.$domain" +short A | awk -v subdomain="$subdomain" -v domain="$domain" '{
+    print "The subdomain " subdomain " is a A record and points to " $1
+  }'
+}
+
+if [[ -z "$1" ]]; then
+  echo "Domain name is mandatory"
+  exit 1
+fi
+
+domain=$1
+
+if [[ -n "$2" ]]; then
+  get_dns_record "$2" "$domain"
+else
+  for subdomain in www lb-01 web-01 web-02; do
+    get_dns_record "$subdomain" "$domain"
+  done
+fi
